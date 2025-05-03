@@ -704,7 +704,7 @@ body {
   padding: 1.5rem 1.5rem 2rem;
   border-radius: 10px;
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  text-align: left;
   width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
   max-width: 600px; /* Giới hạn chiều rộng tối đa */
   margin-left: auto; /* Căn giữa */
