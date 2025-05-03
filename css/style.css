@@ -1,0 +1,958 @@
+/* Reset một số thiết lập mặc định */
+* {
+  box-sizing: border-box; /* Đảm bảo padding và border không ảnh hưởng đến kích thước phần tử */
+}
+
+body {
+  margin: 0; /* Loại bỏ khoảng cách mặc định của body */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font chữ mặc định */
+  background: #f9f9f9; /* Màu nền của trang */
+  color: #333; /* Màu chữ mặc định */
+  display: flex; /* Sử dụng flexbox để căn chỉnh nội dung */
+  flex-direction: column; /* Sắp xếp các phần tử theo chiều dọc */
+  min-height: 100vh; /* Chiều cao tối thiểu của body bằng chiều cao màn hình */
+}
+
+.container {
+  max-width: 600px; /* Chiều rộng tối đa của container */
+  margin: 1rem auto 2rem; /* Căn giữa container và thêm khoảng cách trên/dưới */
+  padding: 0 1rem; /* Thêm khoảng cách bên trong container */
+  width: 100%; /* Chiếm toàn bộ chiều rộng */
+}
+
+/* === Phần tiêu đề =============================================================================================== */
+/* ----- General Styles for the Section ----- */
+.product-urgency-info {
+  font-family: Arial, sans-serif; /* Chọn font chữ phù hợp */
+  padding: 15px; /* Thêm khoảng đệm xung quanh section */
+  border: 1px solid #eee; /* Có thể thêm viền nhẹ nếu muốn */
+  border-radius: 10px; /* Bo góc nhẹ cho section */
+  max-width: 600px; /* Giới hạn chiều rộng tối đa nếu cần */
+  margin: 1em auto; /* Canh giữa và tạo khoảng cách trên/dưới */
+  background-color: #fff; /* Nền trắng cho section */
+  overflow: hidden; /* Đảm bảo các phần tử con không tràn ra ngoài */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Hiệu ứng đổ bóng */
+}
+
+/* ----- Viewer Count Styles ----- */
+.product-urgency-info .viewer-count {
+  font-size: 1.35em; /* Kích thước chữ */
+  color: #333; /* Màu chữ */
+  margin-bottom: 10px; /* Khoảng cách dưới */
+  text-align: center; /* Canh giữa nếu muốn, hoặc để mặc định (trái) */
+}
+
+.product-urgency-info .count-highlight {
+  background-color: #fce4ec; /* Màu nền hồng nhạt (gần giống ảnh) */
+  color: #ad1457; /* Màu chữ hồng đậm hơn cho số */
+  padding: 2px 6px; /* Khoảng đệm trong */
+  border-radius: 4px; /* Bo góc nhẹ */
+  font-weight: bold; /* In đậm số */
+  display: inline-block; /* Để padding và background hoạt động tốt */
+}
+
+/* ----- Stock Status Styles ----- */
+.product-urgency-info .stock-status {
+  display: flex; /* Sử dụng Flexbox để sắp xếp badge và text */
+  align-items: center; /* Canh giữa các phần tử theo chiều dọc */
+  margin-bottom: 12px; /* Khoảng cách dưới */
+  flex-wrap: wrap; /* Cho phép xuống dòng nếu không đủ chỗ */
+  justify-content: center; /* Canh giữa các item nếu muốn */
+}
+
+.product-urgency-info .hurry-up-badge {
+  background: linear-gradient(to bottom, #ff8c42, #ff5722); /* Màu nền cam gradient */
+  color: white; /* Màu chữ trắng */
+  padding: 6px 18px; /* Khoảng đệm trong */
+  border-radius: 20px; /* Bo góc tròn */
+  font-weight: bold; /* In đậm */
+  font-size: 1em; /* Kích thước chữ */
+  margin-right: 10px; /* Khoảng cách với text bên phải */
+  transform: rotate(-3deg); /* Hơi nghiêng giống ảnh */
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Thêm bóng đổ nhẹ */
+  display: inline-block; /* Cần thiết cho transform và margin */
+  flex-shrink: 0; /* Không co lại khi không đủ chỗ */
+  animation: wobble 1s ease-in-out infinite; /* Hiệu ứng lắc lư lặp lại vô hạn */
+}
+
+.product-urgency-info .stock-text {
+  font-size: 0.9rem; /* Giảm kích thước font chữ */
+  color: #555; /* Màu chữ xám nhạt */
+  flex-grow: 1; /* Cho phép text chiếm không gian còn lại */
+  text-align: left; /* Canh lề trái cho phần text này */
+  /* Nếu muốn text luôn ở giữa khi xuống dòng, bỏ flex-grow và đặt text-align: center cho .stock-status */
+}
+
+.product-urgency-info .remaining-count {
+  font-size: 1rem; /* Kích thước font chữ cho số lượng còn lại */
+  font-weight: bold; /* In đậm số lượng */
+  color: #ef5350; /* Màu đỏ nổi bật */
+}
+
+/* ----- Progress Bar Styles ----- */
+.product-urgency-info .stock-progress-bar {
+  width: 100%; /* Chiều rộng 100% */
+}
+
+/* Reset giao diện mặc định của progress bar */
+.product-urgency-info progress#stock-level {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 12px; /* Chiều cao thanh progress */
+  border: none; /* Bỏ viền mặc định */
+  border-radius: 6px; /* Bo góc cho cả thanh */
+  overflow: hidden; /* Đảm bảo phần value không tràn ra khỏi bo góc */
+}
+
+/* Style cho phần nền (track) của progress bar (Webkit - Chrome, Safari, Edge) */
+.product-urgency-info progress#stock-level::-webkit-progress-bar {
+  background-color: #e0e0e0; /* Màu nền xám nhạt */
+  border-radius: 6px;
+}
+
+/* Style cho phần giá trị (fill) của progress bar (Webkit) */
+.product-urgency-info progress#stock-level::-webkit-progress-value {
+  background: linear-gradient(to right, #ff8c42, #ff5722); /* Màu cam gradient giống badge */
+  border-radius: 6px; /* Bo góc cho phần value */
+}
+
+/* Style cho phần giá trị (fill) của progress bar (Firefox) */
+.product-urgency-info progress#stock-level::-moz-progress-bar {
+  background: linear-gradient(to right, #ff8c42, #ff5722); /* Màu cam gradient giống badge */
+  border-radius: 6px;
+}
+
+/* === Phần slideshow ở trên cùng ============================================================================= */
+/* ----- General Card Styling ----- */
+.product-details-card {
+  font-family: Arial, sans-serif; /* Hoặc font phù hợp hơn */
+  border: 1px solid #e0e0e0; /* Viền xám nhạt */
+  background-color: #fff;
+  max-width: 600px; /* Giới hạn chiều rộng tối đa nếu cần */
+  margin: 1em auto; /* Canh giữa và tạo khoảng cách */
+  overflow: hidden; /* Tránh nội dung tràn ra ngoài */
+  border-radius: 4px; /* Bo góc nhẹ (tùy chọn) */
+}
+
+/* ----- Product Image Area ----- */
+.product-image-container {
+  position: relative; /* Để định vị các badge bên trong */
+  background-color: #f5f5f5; /* Màu nền nhạt cho ảnh nếu ảnh có phần trong suốt */
+}
+
+.product-main-image {
+  display: block; /* Loại bỏ khoảng trắng thừa dưới ảnh */
+  width: 100%;
+  height: auto; /* Duy trì tỷ lệ khung hình */
+}
+
+/* ----- Overlay Badges Styling ----- */
+.badge-overlay {
+  position: absolute;
+  padding: 4px 8px;
+  font-size: 0.8em;
+  font-weight: bold;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  line-height: 1.2;
+}
+
+.original-badge {
+  top: 10px;
+  left: 10px;
+  background-color: #ffc107; /* Màu vàng gold */
+  color: #333;
+  /* Cần hình ảnh/gradient phức tạp hơn để giống 100% */
+}
+
+.product-type-badge {
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.8); /* Nền trắng mờ */
+  color: #333;
+  text-align: right;
+  font-size: 0.9em;
+}
+
+.product-type-badge strong {
+  color: #e65100; /* Màu cam đậm cho chữ Probiotic */
+  font-size: 1.4em; /* To hơn */
+  display: block; /* Xuống dòng */
+}
+
+/* ----- Product Info Content Area ----- */
+.product-info-content {
+  padding: 0; /* Bỏ padding ở đây vì các block con sẽ có padding riêng */
+}
+
+/* ----- Price & Timer Block ----- */
+.price-timer-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f44336; /* Màu đỏ */
+  color: white;
+  padding: 10px 15px;
+}
+
+.price-section .current-price {
+  font-size: 1.9em;
+  font-weight: bold;
+  display: block; /* Cho giá chính xuống dòng */
+  line-height: 1.1;
+}
+
+.price-section .original-discount {
+  font-size: 0.9em;
+  opacity: 0.9;
+}
+
+.price-section .original-price {
+  margin-right: 8px;
+  text-decoration: line-through; /* Có sẵn từ thẻ <del> */
+}
+
+.price-section .discount-percentage {
+  font-weight: bold;
+}
+
+.timer-section {
+  text-align: right;
+}
+
+.timer-section .flash-sale-title {
+  font-size: 0.8em;
+  display: block;
+  margin-bottom: 4px;
+  opacity: 0.9;
+}
+
+.timer-section .countdown-timer {
+  font-size: 0.95em;
+}
+
+.timer-section .time-unit {
+  background-color: rgba(0, 0, 0, 0.15); /* Nền tối nhẹ cho số */
+  padding: 2px 4px;
+  border-radius: 2px;
+  font-weight: bold;
+  margin: 0 1px;
+}
+
+/* ----- Badges, Rating & Inline Shipping ----- */
+.badges-rating-shipping {
+  display: flex;
+  flex-wrap: wrap; /* Cho phép xuống dòng nếu cần */
+  align-items: center;
+  gap: 10px; /* Khoảng cách giữa các mục */
+  padding: 12px 15px;
+  font-size: 0.85em;
+  border-bottom: 1px solid #eee; /* Đường kẻ phân cách */
+}
+
+.badges-rating-shipping .badge { /* Kiểu chung cho các badge nhỏ */
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 0.95em;
+}
+
+.badges-rating-shipping .hot-badge {
+  background-color: #d32f2f; /* Màu đỏ đậm hơn */
+  color: white;
+}
+
+.badges-rating-shipping .rating {
+  display: inline-flex; /* Để giá trị và sao nằm cạnh nhau */
+  align-items: center;
+}
+
+.badges-rating-shipping .rating-value {
+  color: #f57f17; /* Màu cam/vàng */
+  font-weight: bold;
+  margin-right: 3px;
+}
+
+.badges-rating-shipping .icon-star {
+  color: #f57f17; /* Màu cam/vàng */
+  /* --- CẦN THAY THẾ ICON --- */
+  content: '★'; /* Ký tự sao tạm thời */
+  font-size: 1.1em;
+}
+
+.badges-rating-shipping .review-count {
+  color: #666; /* Màu xám */
+  border-left: 1px solid #ddd; /* Đường kẻ dọc phân cách */
+  padding-left: 10px;
+}
+
+.badges-rating-shipping .free-shipping-inline {
+  color: #388e3c; /* Màu xanh lá */
+  border: 1px solid #c8e6c9; /* Viền xanh lá nhạt */
+   padding: 3px 8px;
+  border-radius: 3px;
+  font-weight: normal;
+}
+
+/* ----- Product Title ----- */
+.product-title {
+  font-size: 1.15em;
+  font-weight: 600; /* Hơi đậm */
+  color: #333;
+  line-height: 1.4;
+  padding: 10px 15px 5px 15px; /* Khoảng đệm */
+  margin: 0;
+}
+
+.product-title .sale-tag {
+  color: #f44336; /* Màu đỏ */
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+/* ----- Product Features ----- */
+.product-features {
+  list-style: none;
+  padding: 0 15px 15px 15px;
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.feature-item .icon-checkmark {
+  color: #4caf50; /* Màu xanh lá */
+  margin-right: 8px;
+  /* --- CẦN THAY THẾ ICON --- */
+  content: '✓'; /* Ký tự tick tạm thời */
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+/* ----- Sales Count & Bottom Shipping ----- */
+.sales-bottom-shipping {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  font-size: 0.85em;
+  color: #666;
+  border-top: 1px solid #eee; /* Đường kẻ phân cách trên */
+  background-color: #fafafa; /* Nền hơi xám nhẹ (tùy chọn) */
+}
+
+.sales-count {
+  margin: 0;
+}
+
+.bottom-shipping-info {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  color: #388e3c; /* Màu xanh lá */
+  font-weight: bold;
+}
+
+.bottom-shipping-info .icon-shipping-truck {
+  margin-right: 5px;
+  /* --- CẦN THAY THẾ ICON --- */
+  content: '🚚'; /* Emoji xe tải tạm thời */
+  font-size: 1.2em;
+}
+
+/* ----- Placeholder Icon Styling (Cần thay thế bằng icon thật) ----- */
+/* Ví dụ nếu dùng Font Awesome: */
+/*
+.icon-star::before { font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f005"; }
+.icon-checkmark::before { font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f00c"; }
+.icon-shipping-truck::before { font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f0d1"; }
+*/
+
+
+
+#slideshow {
+  position: relative; /* Định vị tương đối để chứa các phần tử con */
+  width: 100%; /* Chiều rộng đầy đủ */
+  height: 320px; /* Chiều cao cố định */
+  border-radius: 10px; /* Bo góc cho slideshow */
+  overflow: hidden; /* Ẩn các phần tử vượt ra ngoài khung */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Hiệu ứng đổ bóng */
+  background: #222; /* Màu nền mặc định */
+}
+
+#slideshow img {
+  position: absolute; /* Định vị tuyệt đối để xếp chồng các ảnh */
+  width: 100%; /* Chiều rộng đầy đủ */
+  height: 100%; /* Chiều cao đầy đủ */
+  object-fit: cover; /* Đảm bảo ảnh không bị méo */
+  opacity: 0; /* Ẩn ảnh mặc định */
+  transition: opacity 1s ease-in-out; /* Hiệu ứng chuyển đổi mượt mà */
+}
+
+#slideshow img.active {
+  opacity: 1; /* Hiển thị ảnh đang hoạt động */
+}
+
+#slideshow .slide-info {
+  position: absolute; /* Định vị tuyệt đối trong slideshow */
+  bottom: 12px; /* Cách mép dưới 12px */
+  left: 12px; /* Cách mép trái 12px */
+  background: rgba(0, 0, 0, 0.5); /* Nền đen trong suốt */
+  color: #fff; /* Màu chữ trắng */
+  padding: 6px 12px; /* Khoảng cách bên trong */
+  border-radius: 4px; /* Bo góc cho nền */
+  font-size: 1rem; /* Kích thước chữ */
+  backdrop-filter: blur(5px); /* Hiệu ứng làm mờ nền */
+}
+
+.nav-buttons {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 10px;
+  pointer-events: none;
+  /* Prevent interference, override per button */
+}
+
+.nav-buttons button {
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 10px;
+  transition: background 0.3s;
+  pointer-events: auto;
+}
+
+.nav-buttons button:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.dots {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  border-radius: 50%;
+  background: #bbb;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: #1a73e8;
+}
+
+/* === Phần form đăng ký ========================================================================================= */
+#consultation-form {
+  background: #fff; /* Nền trắng */
+  margin-top: 2rem; /* Khoảng cách phía trên */
+  padding: 1.5rem 1.5rem 2rem; /* Khoảng cách bên trong */
+  border-radius: 10px; /* Bo góc cho form */
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+  text-align: center; /* Căn giữa nội dung */
+}
+
+#consultation-form h2 {
+  margin-top: 0; /* Loại bỏ khoảng cách trên */
+  font-weight: 700; /* Chữ đậm */
+  font-size: 1.6rem; /* Kích thước chữ */
+  color: #1a73e8; /* Màu chữ xanh */
+}
+
+#consultation-form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+#consultation-form input[type="text"],
+#consultation-form input[type="tel"],
+#consultation-form select {
+  width: 100%; /* Chiều rộng đầy đủ */
+  padding: 8px 12px; /* Khoảng cách bên trong */
+  margin-top: 6px; /* Khoảng cách phía trên */
+  border-radius: 5px; /* Bo góc cho ô nhập */
+  border: 1.5px solid #ccc; /* Viền màu xám */
+  font-size: 1rem; /* Kích thước chữ */
+  transition: border-color 0.3s ease; /* Hiệu ứng chuyển đổi màu viền */
+  box-sizing: border-box; /* Bao gồm padding và border trong kích thước */
+}
+
+#consultation-form input[type="text"]:focus,
+#consultation-form input[type="tel"]:focus,
+#consultation-form select:focus {
+  outline: none;
+  border-color: #1a73e8;
+  box-shadow: 0 0 8px rgba(26, 115, 232, 0.4);
+}
+
+#consultation-form .checkbox-group {
+  margin-top: 1rem;
+  display: flex;
+  align-items: flex-start;
+  /* chuyển về flex-start */
+  justify-content: center;
+}
+
+#consultation-form .checkbox-group input[type="checkbox"] {
+  margin-right: 8px;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  top: 16px;
+  /* đẩy checkbox xuống */
+}
+
+#consultation-form .checkbox-group label {
+  font-size: 26px;
+  /* 🔼 tăng cỡ chữ */
+  line-height: 1.4;
+  /* đảm bảo chiều cao dòng phù hợp */
+  font-weight: 500;
+  /* tùy chọn: cho chữ rõ nét hơn */
+}
+
+#consultation-form button {
+  margin-top: 1.5rem; /* Khoảng cách phía trên */
+  background-color: #1a73e8; /* Màu nền xanh */
+  color: #fff; /* Màu chữ trắng */
+  border: none; /* Loại bỏ viền */
+  padding: 12px 18px; /* Khoảng cách bên trong */
+  border-radius: 6px; /* Bo góc cho nút */
+  font-size: 1.1rem; /* Kích thước chữ */
+  font-weight: 600; /* Chữ đậm */
+  cursor: pointer; /* Con trỏ chuột dạng tay */
+  transition: background-color 0.3s ease; /* Hiệu ứng chuyển đổi màu nền */
+  user-select: none; /* Không cho phép chọn nội dung nút */
+  width: 100%; /* Chiều rộng đầy đủ */
+  max-width: 600px; /* Chiều rộng tối đa */
+  display: block; /* Hiển thị dạng khối */
+  margin-left: auto; /* Căn giữa nút */
+  margin-right: auto; /* Căn giữa nút */
+}
+
+#consultation-form button:hover {
+  background-color: #1669c1; /* Màu nền khi hover */
+}
+
+#form-message {
+  margin-top: 12px;
+  font-weight: 600;
+  min-height: 1.5em;
+}
+
+#form-message.success {
+  color: #1e7e34;
+}
+
+#form-message.error {
+  color: #c82333;
+}
+
+/* === Phần feedback khách hàng ================================================================================== */
+#feedback-section {
+  margin-top: 3rem; /* Khoảng cách phía trên */
+  background: #fff; /* Nền trắng */
+  border-radius: 10px; /* Bo góc */
+  padding: 1.5rem; /* Khoảng cách bên trong */
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+}
+
+#feedback-section h2 {
+  color: #333;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.feedback-list {
+  display: flex; /* Sử dụng flexbox */
+  flex-direction: column; /* Hiển thị theo chiều dọc */
+  gap: 1rem; /* Khoảng cách giữa các feedback */
+  max-height: 440px; /* Chiều cao tối đa */
+  overflow-y: auto; /* Hiển thị thanh cuộn dọc nếu vượt quá chiều cao */
+  padding-right: 6px; /* Khoảng cách bên phải */
+}
+
+.feedback-card {
+  border: 1px solid #ddd; /* Viền màu xám nhạt */
+  border-radius: 8px; /* Bo góc */
+  padding: 1rem 1.2rem; /* Khoảng cách bên trong */
+  background: #fefefe; /* Nền trắng nhạt */
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05); /* Hiệu ứng đổ bóng nhẹ */
+  display: flex; /* Sử dụng flexbox */
+  gap: 1rem; /* Khoảng cách giữa các phần tử */
+  align-items: flex-start; /* Căn trên cùng theo chiều dọc */
+}
+
+.avatar {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.feedback-content {
+  flex-grow: 1;
+}
+
+.feedback-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.feedback-name {
+  font-weight: 700;
+  color: #1a73e8;
+}
+
+.feedback-stars {
+  color: #f4b400;
+  font-size: 1.2rem;
+}
+
+.feedback-text {
+  font-size: 1rem;
+  line-height: 1.3;
+  color: #555;
+}
+
+/* Scrollbar refinement for feedback list */
+.feedback-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.feedback-list::-webkit-scrollbar-thumb {
+  background-color: rgba(26, 115, 232, 0.5);
+  border-radius: 3px;
+}
+
+.feedback-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#feedback-title {
+  text-align: center; /* Căn giữa nội dung */
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  #slideshow {
+    height: 220px;
+  }
+
+  #consultation-form button {
+    width: 100%;
+  }
+
+  .feedback-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .feedback-header {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+#floating-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000; /* Đảm bảo nút nổi ở trên cùng */
+}
+
+#floating-button button {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#floating-button button:hover {
+  background-color: #1669c1;
+}
+
+/* === Basic Info Section ========================================================================================================== */
+#basic-info-section {
+  background: #fff;
+  margin-top: 2rem;
+  padding: 1.5rem 1.5rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
+  max-width: 600px; /* Giới hạn chiều rộng tối đa */
+  margin-left: auto; /* Căn giữa */
+  margin-right: auto; /* Căn giữa */
+  box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến chiều rộng */
+}
+
+
+
+#basic-info-section h2 {
+  margin-top: 0;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #1a73e8;
+}
+
+#basic-info {
+  display: block; /* Hiển thị các mục theo chiều dọc */
+  margin-top: 1rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: #333;
+  background: #f9f9f9;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem; /* Thêm khoảng cách giữa các mục */
+}
+
+.info-item:last-child {
+  margin-bottom: 0; /* Xóa khoảng cách dưới cùng của mục cuối */
+}
+
+.info-item i {
+  color: #1a73e8;
+  font-size: 1.2rem;
+}
+
+/* Đặt vị trí cố định cho banner ở cuối trang=============================================================================================== */
+#bottom-banner {
+  position: fixed; /* Banner luôn cố định ở cuối màn hình */
+  bottom: 0; /* Căn sát mép dưới của trình duyệt */
+  left: 0; /* Căn sát mép trái của trình duyệt */
+  width: 100%; /* Chiếm toàn bộ chiều rộng của trình duyệt */
+  background: linear-gradient(90deg, #e8c91a, #f4c542); /* Hiệu ứng chuyển màu nền từ trái sang phải */
+  color: white; /* Màu chữ trắng */
+  display: flex; /* Sử dụng flexbox để căn chỉnh nội dung */
+  align-items: center; /* Căn giữa nội dung theo chiều dọc */
+  justify-content: space-between; /* Căn đều nội dung, khoảng cách giữa các phần tử */
+  padding: 10px 20px; /* Khoảng cách bên trong giữa nội dung và viền */
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.2); /* Hiệu ứng đổ bóng phía trên banner */
+  z-index: 1100; /* Đảm bảo banner nằm trên các phần tử khác */
+  box-sizing: border-box; /* Bao gồm padding và border trong kích thước tổng */
+}
+
+/* Định dạng hình ảnh trong banner */
+#bottom-banner img {
+  height: 60px; /* Chiều cao của hình ảnh */
+  border-radius: 8px; /* Bo góc cho hình ảnh */
+  object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
+  margin-right: 15px; /* Khoảng cách giữa hình ảnh và nội dung bên cạnh */
+  flex-shrink: 0; /* Không cho hình ảnh co lại khi không gian bị hạn chế */
+}
+
+/* Định dạng nội dung văn bản trong banner */
+#bottom-banner .banner-content {
+  flex-grow: 1; /* Cho phép nội dung chiếm không gian còn lại */
+  font-size: 1.2rem; /* Kích thước chữ */
+  font-weight: 600; /* Độ đậm của chữ */
+  user-select: none; /* Không cho phép người dùng chọn văn bản */
+}
+
+/* Định dạng nút trong banner */
+#bottom-banner button {
+  background-color: #ff385c; /* Màu nền của nút */
+  border: none; /* Loại bỏ viền nút */
+  color: white; /* Màu chữ trắng */
+  padding: 12px 24px; /* Khoảng cách bên trong nút */
+  font-size: 1.2rem; /* Kích thước chữ */
+  font-weight: bold; /* Độ đậm của chữ */
+  border-radius: 30px; /* Bo góc cho nút */
+  cursor: pointer; /* Thay đổi con trỏ chuột khi hover */
+  display: flex; /* Sử dụng flexbox để căn chỉnh nội dung trong nút */
+  align-items: center; /* Căn giữa nội dung theo chiều dọc */
+  justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+  animation: wobble-heartbeat 1.5s ease-in-out infinite; /* Hiệu ứng lắc lư và nhịp đập */
+  user-select: none; /* Không cho phép chọn nội dung nút */
+  box-shadow: 0 0 8px #ff385c88; /* Hiệu ứng đổ bóng cho nút */
+  transition: box-shadow 0.3s ease; /* Hiệu ứng chuyển đổi mượt mà khi hover */
+}
+
+/* Hiệu ứng khi hover vào nút */
+#bottom-banner button:hover {
+  box-shadow: 0 0 15px #ff385ccc; /* Tăng độ sáng của bóng khi hover */
+}
+
+/* Định dạng biểu tượng trong nút */
+#bottom-banner button i {
+  margin-left: 8px; /* Khoảng cách giữa biểu tượng và chữ */
+  font-size: 1.4rem; /* Kích thước biểu tượng */
+  color: #ffadba; /* Màu của biểu tượng */
+}
+
+/* Hiệu ứng lắc lư và nhịp đập */
+@keyframes wobble-heartbeat {
+  0% {
+    transform: scale(1) rotate(0deg); /* Kích thước ban đầu, không xoay */
+  }
+  25% {
+    transform: scale(1.1) rotate(-5deg); /* Phóng to nhẹ và nghiêng trái */
+  }
+  50% {
+    transform: scale(1.2) rotate(5deg); /* Phóng to hơn và nghiêng phải */
+  }
+  75% {
+    transform: scale(1.1) rotate(-5deg); /* Quay lại nghiêng trái */
+  }
+  100% {
+    transform: scale(1) rotate(0deg); /* Trở về trạng thái ban đầu */
+  }
+}
+
+/* Hiệu ứng nhịp tim cho nút */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Hiệu ứng lắc lư */
+@keyframes wobble {
+  0% {
+    transform: rotate(0deg); /* Trạng thái ban đầu */
+  }
+  25% {
+    transform: rotate(-5deg); /* Nghiêng sang trái */
+  }
+  50% {
+    transform: rotate(5deg); /* Nghiêng sang phải */
+  }
+  75% {
+    transform: rotate(-5deg); /* Nghiêng lại sang trái */
+  }
+  100% {
+    transform: rotate(0deg); /* Trở về trạng thái ban đầu */
+  }
+}
+
+/* Hiệu ứng lắc lư nhanh */
+@keyframes quick-wobble {
+  0% {
+    transform: rotate(0deg); /* Trạng thái ban đầu */
+  }
+  25% {
+    transform: rotate(-10deg); /* Nghiêng sang trái */
+  }
+  50% {
+    transform: rotate(10deg); /* Nghiêng sang phải */
+  }
+  75% {
+    transform: rotate(-10deg); /* Nghiêng lại sang trái */
+  }
+  100% {
+    transform: rotate(0deg); /* Trở về trạng thái ban đầu */
+  }
+}
+
+/* Hiệu ứng nhấn mạnh */
+@keyframes emphasize {
+  0% {
+    transform: scale(1); /* Kích thước ban đầu */
+  }
+  50% {
+    transform: scale(1.2); /* Phóng to */
+  }
+  100% {
+    transform: scale(1); /* Trở về kích thước ban đầu */
+  }
+}
+
+/* Áp dụng hiệu ứng cho giá */
+.highlight-price {
+  display: inline-block; /* Để hiệu ứng hoạt động chính xác */
+  animation: quick-wobble 0.5s ease-in-out, emphasize 0.5s ease-in-out; /* Kết hợp hiệu ứng lắc lư và nhấn mạnh */
+  animation-iteration-count: infinite; /* Lặp lại vô hạn */
+}
+
+/* Định dạng section trống ở cuối trang */
+#empty-section {
+  background: transparent; /* Màu nền của section trống */
+  border-radius: 10px; /* Bo góc cho section trống */
+  margin-top: 2rem; /* Khoảng cách trên của section trống */
+  height: 100px; /* Chiều cao của section trống */
+}
+
+/* Popup container */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Nền mờ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Nội dung popup */
+.popup-content {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content p {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.popup-content button {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.popup-content button:hover {
+  background-color: #1669c1;
+}
+
+/* Ẩn popup */
+.hidden {
+  display: none;
+}
+
+

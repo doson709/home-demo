@@ -1,0 +1,143 @@
+/* ----- General Comment Styling ----- */
+.testimonial-comment {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #fff;
+  padding: 12px 0;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  line-height: 1.35;
+}
+
+/* ----- Comment Header ----- */
+.comment-header {
+  display: flex;
+  align-items: flex-start;
+  /* Giữ khoảng cách đã giảm ở bước trước */
+  margin-bottom: 4px; /* Khoảng cách dưới header */
+}
+
+.comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.comment-author-info {
+ /* Có thể không cần style */
+}
+
+.comment-author-name {
+  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 0.9rem;
+  text-decoration: none;
+  /* Thêm chút padding-top để căn chỉnh dọc tốt hơn với avatar nếu cần */
+  padding-top: 2px;
+}
+.comment-author-name:hover {
+  text-decoration: underline;
+}
+
+
+/* ----- Comment Body ----- */
+.comment-body {
+  /* === THÊM LẠI THỤT LỀ ĐỂ GIỐNG ẢNH GỐC === */
+  /* Nội dung bắt đầu thẳng hàng với tên, không phải avatar */
+  padding-left: 50px; /* <-- QUAN TRỌNG: Thêm lại dòng này (40px avatar + 10px margin) */
+}
+
+.comment-text {
+  color: #1c1e21;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  padding-left: 0; /* Đảm bảo không có padding riêng ở đây */
+}
+
+.comment-image-container {
+  margin-bottom: 10px;
+  padding-left: 0; /* Đảm bảo không có padding riêng ở đây */
+}
+
+.comment-attached-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* ----- Comment Footer ----- */
+.comment-footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  color: #606770;
+  gap: 8px;
+  padding-top: 8px; /* Khoảng cách trên footer */
+
+  /* === THÊM LẠI THỤT LỀ ĐỂ GIỐNG ẢNH GỐC === */
+  padding-left: 50px; /* <-- QUAN TRỌNG: Thêm lại dòng này, giống comment-body */
+}
+
+/* ----- Action và Meta Styling (Giữ nguyên như trước) ----- */
+.comment-actions { /* ... */ }
+.action-link {
+  color: #606770;
+  font-weight: 600;
+  text-decoration: none;
+  margin-right: 4px;
+}
+.action-link:hover {
+  text-decoration: underline;
+}
+.action-separator {
+  margin: 0 2px;
+}
+.comment-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.reaction-icons {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* --- ICON PLACEHOLDER - CẦN THAY THẾ BẰNG ICON THẬT --- */
+.icon {
+  display: inline-block;
+  width: 18px; /* Giữ kích thước icon */
+  height: 18px;
+  line-height: 18px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 0.8em;
+  margin-left: -5px; /* Giữ hiệu ứng chồng icon */
+  border: 1px solid #fff; /* Giữ viền trắng tách biệt */
+  background-color: #eee; /* Placeholder background */
+  vertical-align: middle; /* Căn giữa theo chiều dọc */
+}
+.icon:first-child {
+  margin-left: 0;
+}
+.icon-heart-reaction { z-index: 1; /* Đảm bảo icon trái tim đè lên */ }
+.icon-like-reaction { /* Có thể thêm style riêng nếu cần */ }
+/* --- KẾT THÚC ICON PLACEHOLDER --- */
+
+.reaction-count {
+  margin-left: 4px;
+  vertical-align: middle;
+}
+.comment-timestamp {
+  text-decoration: none;
+  color: #606770;
+  vertical-align: middle;
+}
+.comment-timestamp:hover {
+  text-decoration: underline;
+}
