@@ -14,7 +14,7 @@ body {
 }
 
 .container {
-  max-width: 600px; /* Chiều rộng tối đa của container */
+  max-width: 400px; /* Chiều rộng tối đa của container */
   margin: 1rem auto 2rem; /* Căn giữa container và thêm khoảng cách trên/dưới */
   padding: 0 1rem; /* Thêm khoảng cách bên trong container */
   width: 100%; /* Chiếm toàn bộ chiều rộng */
@@ -27,7 +27,7 @@ body {
   padding: 15px; /* Thêm khoảng đệm xung quanh section */
   border: 1px solid #eee; /* Có thể thêm viền nhẹ nếu muốn */
   border-radius: 10px; /* Bo góc nhẹ cho section */
-  max-width: 600px; /* Giới hạn chiều rộng tối đa nếu cần */
+  max-width: 400px; /* Giới hạn chiều rộng tối đa nếu cần */
   margin: 1em auto; /* Canh giữa và tạo khoảng cách trên/dưới */
   background-color: #fff; /* Nền trắng cho section */
   overflow: hidden; /* Đảm bảo các phần tử con không tràn ra ngoài */
@@ -36,7 +36,7 @@ body {
 
 /* ----- Viewer Count Styles ----- */
 .product-urgency-info .viewer-count {
-  font-size: 0.8em; /* Kích thước chữ */
+  font-size: 1.05em; /* Kích thước chữ */
   color: #333; /* Màu chữ */
   margin-bottom: 10px; /* Khoảng cách dưới */
   text-align: center; /* Canh giữa nếu muốn, hoặc để mặc định (trái) */
@@ -129,7 +129,7 @@ body {
   font-family: Arial, sans-serif; /* Hoặc font phù hợp hơn */
   border: 1px solid #e0e0e0; /* Viền xám nhạt */
   background-color: #fff;
-  max-width: 600px; /* Giới hạn chiều rộng tối đa nếu cần */
+  max-width: 400px; /* Giới hạn chiều rộng tối đa nếu cần */
   margin: 1em auto; /* Canh giữa và tạo khoảng cách */
   overflow: hidden; /* Tránh nội dung tràn ra ngoài */
   border-radius: 4px; /* Bo góc nhẹ (tùy chọn) */
@@ -540,7 +540,7 @@ body {
   transition: background-color 0.3s ease; /* Hiệu ứng chuyển đổi màu nền */
   user-select: none; /* Không cho phép chọn nội dung nút */
   width: 100%; /* Chiều rộng đầy đủ */
-  max-width: 600px; /* Chiều rộng tối đa */
+  max-width: 400px; /* Chiều rộng tối đa */
   display: block; /* Hiển thị dạng khối */
   margin-left: auto; /* Căn giữa nút */
   margin-right: auto; /* Căn giữa nút */
@@ -654,7 +654,7 @@ body {
 }
 
 /* Responsive */
-@media (max-width: 600px) {
+@media (max-width: 400px) {
   #slideshow {
     height: 220px;
   }
@@ -704,9 +704,9 @@ body {
   padding: 1.5rem 1.5rem 2rem;
   border-radius: 10px;
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
-  text-align: left;
+  text-align: center;
   width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
-  max-width: 600px; /* Giới hạn chiều rộng tối đa */
+  max-width: 400px; /* Giới hạn chiều rộng tối đa */
   margin-left: auto; /* Căn giữa */
   margin-right: auto; /* Căn giữa */
   box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến chiều rộng */
@@ -717,7 +717,7 @@ body {
 #basic-info-section h2 {
   margin-top: 0;
   font-weight: 700;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   color: #1a73e8;
 }
 
@@ -728,9 +728,9 @@ body {
 
 .info-item {
   display: flex;
-  align-items: center;
+  align-items: left;
   gap: 0.5rem;
-  font-size: 1rem;
+  font-size: 0.6rem;
   color: #333;
   background: #f9f9f9;
   padding: 0.5rem 1rem;
@@ -745,7 +745,7 @@ body {
 
 .info-item i {
   color: #1a73e8;
-  font-size: 1.2rem;
+  font-size: 1.0rem;
 }
 
 /* Đặt vị trí cố định cho banner ở cuối trang=============================================================================================== */
@@ -768,6 +768,8 @@ body {
 /* Định dạng hình ảnh trong banner */
 #bottom-banner img {
   height: 60px; /* Chiều cao của hình ảnh */
+  width: 80px; /* Chiều rộng của hình ảnh */
+  max-width: 100%; /* Giới hạn chiều rộng tối đa của hình ảnh */
   border-radius: 8px; /* Bo góc cho hình ảnh */
   object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
   margin-right: 15px; /* Khoảng cách giữa hình ảnh và nội dung bên cạnh */
@@ -777,7 +779,11 @@ body {
 /* Định dạng nội dung văn bản trong banner */
 #bottom-banner .banner-content {
   flex-grow: 1; /* Cho phép nội dung chiếm không gian còn lại */
-  font-size: 1.2rem; /* Kích thước chữ */
+  display: flex; /* Sử dụng flexbox để căn chỉnh nội dung */
+  flex-direction: column; /* Hiển thị theo chiều dọc */
+  justify-content: center; /* Căn giữa nội dung theo chiều dọc */
+  margin-left: 15px; /* Khoảng cách giữa hình ảnh và nội dung */
+  font-size: 0.6rem; /* Kích thước chữ */
   font-weight: 600; /* Độ đậm của chữ */
   user-select: none; /* Không cho phép người dùng chọn văn bản */
 }
@@ -788,14 +794,15 @@ body {
   border: none; /* Loại bỏ viền nút */
   color: white; /* Màu chữ trắng */
   padding: 12px 24px; /* Khoảng cách bên trong nút */
-  font-size: 1.2rem; /* Kích thước chữ */
+  margin-left: 25px; /* Khoảng cách giữa nút và nội dung bên cạnh */
+  font-size: 0.6rem; /* Kích thước chữ */
   font-weight: bold; /* Độ đậm của chữ */
-  border-radius: 30px; /* Bo góc cho nút */
+  border-radius: 20px; /* Bo góc cho nút */
   cursor: pointer; /* Thay đổi con trỏ chuột khi hover */
   display: flex; /* Sử dụng flexbox để căn chỉnh nội dung trong nút */
   align-items: center; /* Căn giữa nội dung theo chiều dọc */
   justify-content: center; /* Căn giữa nội dung theo chiều ngang */
-  animation: wobble-heartbeat 1.5s ease-in-out infinite; /* Hiệu ứng lắc lư và nhịp đập */
+  animation: wobble-heartbeat 0.9s ease-in-out infinite; /* Hiệu ứng lắc lư và nhịp đập */
   user-select: none; /* Không cho phép chọn nội dung nút */
   box-shadow: 0 0 8px #ff385c88; /* Hiệu ứng đổ bóng cho nút */
   transition: box-shadow 0.3s ease; /* Hiệu ứng chuyển đổi mượt mà khi hover */
@@ -818,14 +825,32 @@ body {
   0% {
     transform: scale(1) rotate(0deg); /* Kích thước ban đầu, không xoay */
   }
-  25% {
-    transform: scale(1.1) rotate(-5deg); /* Phóng to nhẹ và nghiêng trái */
+  10% {
+    transform: scale(1.05) rotate(-2deg); /* Phóng to nhẹ và nghiêng trái */
+  }
+  20% {
+    transform: scale(1.1) rotate(-5deg); /* Phóng to hơn và nghiêng trái */
+  }
+  30% {
+    transform: scale(1.15) rotate(0deg); /* Phóng to hơn và không xoay */
+  }
+  40% {
+    transform: scale(1.2) rotate(5deg); /* Phóng to nhất và nghiêng phải */
   }
   50% {
-    transform: scale(1.2) rotate(5deg); /* Phóng to hơn và nghiêng phải */
+    transform: scale(1.15) rotate(0deg); /* Giảm nhẹ kích thước và không xoay */
   }
-  75% {
-    transform: scale(1.1) rotate(-5deg); /* Quay lại nghiêng trái */
+  60% {
+    transform: scale(1.1) rotate(-5deg); /* Giảm kích thước và nghiêng trái */
+  }
+  70% {
+    transform: scale(1.05) rotate(-2deg); /* Giảm kích thước hơn và nghiêng nhẹ trái */
+  }
+  80% {
+    transform: scale(1) rotate(0deg); /* Trở về kích thước ban đầu */
+  }
+  90% {
+    transform: scale(1.02) rotate(2deg); /* Nhẹ nhàng phóng to và nghiêng phải */
   }
   100% {
     transform: scale(1) rotate(0deg); /* Trở về trạng thái ban đầu */
